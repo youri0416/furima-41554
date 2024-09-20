@@ -75,3 +75,7 @@ end
 
   gem 'rubocop', require: false
   gem 'pry-rails'
+
+  group :production do
+    gem 'pg'
+  end
