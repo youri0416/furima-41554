@@ -5,6 +5,9 @@ a {
 .main {
   background: #f8f8f8;
 }
+li{
+  list-style: none;
+}
 
 /* 画面上部の「人生を変えるフリマアプリ」帯部分 */
 .title-contents {
