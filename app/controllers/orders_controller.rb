@@ -1,5 +1,8 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_item
+  before_action :move_to_root_path
+  before_action :sold_out
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @order_purchase = OrderPurchase.new
@@ -37,4 +40,16 @@ class OrdersController < ApplicationController
       currency: 'jpy' # 通貨の種類（日本円）
     )
   end
+
+  def move_to_root_path
+    redirect_to root_path if current_user.id == @item.user.id
+  end
+
+  def sold_out
+    if @item.order.present?
+      redirect_to root_path
+    end
+  end
+
+
 end
