@@ -53,6 +53,6 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    redirect_to root_path if current_user.id != @item.user.id
+    redirect_to root_path if current_user.id != @item.user.id || @item.order.present?
   end
 end
