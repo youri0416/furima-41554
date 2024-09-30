@@ -8,5 +8,6 @@ FactoryBot.define do
     street_address { Faker::Address.street_address }
     building { Faker::Address.building_number }
     phone_number { Faker::PhoneNumber.cell_phone_in_e164[1..11] }
+    token { 'tok_abcdefghijk00000000000000000' }
   end
 end

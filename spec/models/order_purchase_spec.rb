@@ -74,6 +74,26 @@ RSpec.describe OrderPurchase, type: :model do
         @order_purchase.valid?
         expect(@order_purchase.errors.full_messages).to include("Phone number can't be blank")
       end
+      it 'phone_numberが9桁以下だと購入できない' do
+        @order_purchase.phone_number = '111111111'
+        @order_purchase.valid?
+        expect(@order_purchase.errors.full_messages).to include("Phone number is invalid")
+      end
+      it 'phone_numberが12桁以上だと購入できない' do
+        @order_purchase.phone_number = '11111111111111'
+        @order_purchase.valid?
+        expect(@order_purchase.errors.full_messages).to include("Phone number is invalid")
+      end
+      it 'phone_numberに数字以外が含まれていると購入できない' do
+        @order_purchase.phone_number = '@111111111'
+        @order_purchase.valid?
+        expect(@order_purchase.errors.full_messages).to include("Phone number is invalid")
+      end
+      it "tokenが空では登録できないこと" do
+        @order_purchase.token = nil
+        @order_purchase.valid?
+        expect(@order_purchase.errors.full_messages).to include("Token can't be blank")
+      end
     end
   end
 end
